@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>William &amp; Gagik</title>
+  <meta name="description" content="Portfolio of William and Gagik: personal links and the projects we've built together.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f2f2f2;
+      --card: #ffffff;
+      --fg: #111111;
+      --sub: #555555;
+      --border: #dddddd;
+      --btn: #111111;
+      --btn-fg: #ffffff;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #0d0d0d;
+        --card: #1a1a1a;
+        --fg: #ffffff;
+        --sub: #bbbbbb;
+        --border: #333333;
+        --btn: #ffffff;
+        --btn-fg: #111111;
+      }
+    }
+    :root[data-theme="dark"] {
+      --bg: #0d0d0d;
+      --card: #1a1a1a;
+      --fg: #ffffff;
+      --sub: #bbbbbb;
+      --border: #333333;
+      --btn: #ffffff;
+      --btn-fg: #111111;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font: 400 15px/1.4 Inter, system-ui, sans-serif;
+    }
+
+    /* Whole site fits on one screen */
+    main {
+      max-width: 860px;
+      min-height: 100dvh;
+      margin: 0 auto;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 20px;
+    }
+
+    h2 {
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--sub);
+      margin-bottom: 8px;
+    }
+
+    /* William and Gagik */
+    .people {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .person h1 {
+      font-size: 26px;
+      font-weight: 800;
+      line-height: 1.1;
+    }
+    .person p {
+      color: var(--sub);
+      margin: 4px 0 14px;
+    }
+
+    /* Small link buttons in a row */
+    .buttons {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .buttons a, .buttons button {
+      display: block;
+      border: 0;
+      font-family: inherit;
+      cursor: pointer;
+      padding: 7px 12px;
+      border-radius: 8px;
+      background: var(--btn);
+      color: var(--btn-fg);
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .buttons a:hover, .buttons button:hover { opacity: .8; }
+
+    /* Quick facts */
+    .chips {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: -4px 0 14px;
+    }
+    .chips li {
+      padding: 4px 10px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    /* Separate portfolio link under the socials */
+    .portfolio-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 12px;
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: inherit;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .portfolio-link:hover { border-color: var(--fg); }
+    .portfolio-link span { color: var(--sub); font-weight: 400; font-size: 14px; }
+
+    /* Expandable full story */
+    details { margin-top: 14px; }
+    summary {
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--sub);
+    }
+    summary:hover { color: var(--fg); }
+    details ul {
+      margin: 10px 0 0 18px;
+      display: grid;
+      gap: 6px;
+      font-size: 14px;
+    }
+
+    /* Shared projects: one compact row each */
+    .project-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .project a, .project .row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      color: inherit;
+      text-decoration: none;
+    }
+    .project:has(a):hover { border-color: var(--fg); }
+    .project .tag {
+      flex-shrink: 0;
+      padding: 4px 10px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--sub);
+    }
+    .project h3 {
+      font-size: 17px;
+      font-weight: 800;
+    }
+    .project p { color: var(--sub); }
+    .project .arrow { font-size: 20px; flex-shrink: 0; }
+
+    /* Our startup: full width, stands out */
+    .project.featured {
+      grid-column: 1 / -1;
+      background: var(--btn);
+      color: var(--btn-fg);
+      border-color: var(--btn);
+    }
+    .project.featured p { color: inherit; opacity: .75; }
+    .project.featured small {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      opacity: .75;
+    }
+    .project.featured:hover { opacity: .9; }
+
+    footer {
+      text-align: center;
+      color: var(--sub);
+      font-size: 13px;
+    }
+
+    @media (max-width: 560px) {
+      .people, .project-list { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="people">
+      <article class="card person">
+        <h1>William</h1>
+        <p>18-year-old Roblox developer from Ontario, Canada. Co-founded halfway, Agent Room, Eclipse Hydration and AGM Emergency Restoration with Gagik.</p>
+        <ul class="chips">
+          <li>Co-founder of 4 businesses</li>
+          <li>Marketer</li>
+          <li>CEO Leadership Program</li>
+          <li>Part-time firefighter</li>
+        </ul>
+        <ul class="buttons">
+          <li><a href="https://github.com/verkan-web" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://x.com/Vjrkan" target="_blank" rel="noopener">X</a></li>
+          <li><a href="https://discord.com/users/691010303378456666" target="_blank" rel="noopener">Discord</a></li>
+        </ul>
+        <a class="portfolio-link" href="https://verkan-web.github.io/verkan/" target="_blank" rel="noopener">
+          Community Manager Portfolio <span>→</span>
+        </a>
+        <details>
+          <summary>More about William</summary>
+          <ul>
+            <li>Co-founded halfway with Gagik: a record of every AI conversation at a company, with flags for risky use and a tamper-proof log. Now running pilots.</li>
+            <li>Has managed communities for some of Roblox's most popular games and creators, on games peaking at 1M+ concurrent players.</li>
+            <li>Co-founded AGM Emergency Restoration, a water damage restoration company in Las Vegas.</li>
+            <li>Has made 30+ Roblox games and worked on 100+, earning $15k+ CAD.</li>
+            <li>Co-founded Agent Room, where Claude and ChatGPT build Roblox games together inside Studio and Blender.</li>
+            <li>Co-founded Eclipse Hydration, a hydration and energy drink brand.</li>
+            <li>Launches and markets Roblox games with Gagik, with the goal of starting a game studio.</li>
+            <li>Youngest ever to complete the CEO Leadership Program.</li>
+            <li>Outside of work: cryptography, the gym and hockey.</li>
+            <li>6'3 btw.</li>
+          </ul>
+        </details>
+      </article>
+
+      <article class="card person">
+        <h1>Gagik</h1>
+        <p>18-year-old founder from Armenia, now in Las Vegas. Co-founded halfway, Agent Room, Eclipse Hydration and AGM Emergency Restoration with William.</p>
+        <ul class="chips">
+          <li>Co-founder of 4 businesses</li>
+          <li>Finance @ UNLV</li>
+          <li>Marketing @ The Firm</li>
+          <li>Taekwondo black belt</li>
+        </ul>
+        <ul class="buttons">
+          <li><button class="copy" data-copy="jimbob671" title="Copy Discord username">Discord: jimbob671</button></li>
+        </ul>
+        <details>
+          <summary>More about Gagik</summary>
+          <ul>
+            <li>Co-founded halfway with William: a record of every AI conversation at a company. Now running pilots.</li>
+            <li>Co-founded AGM Emergency Restoration and runs it day to day in Las Vegas: pro drying, air filtration and moisture detection gear, Google and Yelp ads, and plumber referrals.</li>
+            <li>Handles marketing at The Firm for Vegas Legal Magazine and Rezaee Morgan Media, including promoting the Legal Excellence Awards.</li>
+            <li>Co-founded Agent Room and Eclipse Hydration with William.</li>
+            <li>Has done marketing for Las Vegas plumbers and other local service businesses: social content, graphics, blogs and promo materials.</li>
+            <li>Helps his parents run a car rental and Turo business.</li>
+            <li>Launches and markets Roblox games with William: player analytics, ad budgets and creator outreach, with the goal of starting a game studio.</li>
+            <li>Uses Cursor, Claude, Figma and Canva to build websites and games and to automate his business.</li>
+            <li>Has MMA experience, trains at the gym, and rock climbs. He's building a fitness brand on social media.</li>
+          </ul>
+        </details>
+      </article>
+    </section>
+
+    <section>
+      <h2>What we build together</h2>
+      <ul class="project-list">
+        <li class="card project featured"><a href="https://tryhalfway.com" target="_blank" rel="noopener">
+          <div><small>Our startup</small><h3>halfway</h3><p>A record of every AI conversation at your company. Running pilots now.</p></div>
+          <span class="arrow">→</span>
+        </a></li>
+        <li class="card project"><a href="https://f4destar.com/agent-room/" target="_blank" rel="noopener">
+          <div><h3>Agent Room</h3><p>Claude and ChatGPT building Roblox games together.</p></div>
+          <span class="arrow">→</span>
+        </a></li>
+        <li class="card project"><div class="row">
+          <div><h3>Roblox Games</h3><p>Games we build, launch and market.</p></div>
+          <span class="tag">Link soon</span>
+        </div></li>
+        <li class="card project"><a href="https://agmrestoration.com" target="_blank" rel="noopener">
+          <div><h3>AGM Emergency Restoration</h3><p>Water damage restoration in Las Vegas.</p></div>
+          <span class="arrow">→</span>
+        </a></li>
+        <li class="card project"><a href="https://eclipsehydration.store" target="_blank" rel="noopener">
+          <div><h3>Eclipse Hydration</h3><p>Hydration and energy drink brand.</p></div>
+          <span class="arrow">→</span>
+        </a></li>
+      </ul>
+    </section>
+
+    <footer>© 2026 William &amp; Gagik</footer>
+  </main>
+  <script>
+    // Discord usernames have no profile URL, so the button copies the name instead
+    document.querySelectorAll('.copy').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const label = btn.textContent;
+        try {
+          await navigator.clipboard.writeText(btn.dataset.copy);
+          btn.textContent = 'Copied!';
+        } catch {
+          btn.textContent = btn.dataset.copy;
+        }
+        setTimeout(() => { btn.textContent = label; }, 1500);
+      });
+    });
+  </script>
+</body>
+</html>
